@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {ScriptCache} from './lib/ScriptCache';
+import { ScriptCache } from './lib/ScriptCache';
 import GoogleApi from './lib/GoogleApi';
 
 const defaultMapConfig = {};
@@ -79,11 +79,11 @@ export const wrapper = input => WrappedComponent => {
         google: null
       });
     }
-    
+
     componentWillUnmount() {
       if (this.unregisterLoadHandler) {
         this.unregisterLoadHandler();
-      }  
+      }
     }
 
     initialize(options) {
@@ -109,11 +109,11 @@ export const wrapper = input => WrappedComponent => {
     onLoad(err, tag) {
       this._gapi = window.google;
 
-      this.setState({loaded: true, google: this._gapi});
+      this.setState({ loaded: true, google: this._gapi });
     }
 
     render() {
-      const {LoadingContainer} = this;
+      const { LoadingContainer } = this;
       if (!this.state.loaded) {
         return <LoadingContainer />;
       }
@@ -126,7 +126,7 @@ export const wrapper = input => WrappedComponent => {
       return (
         <React.Fragment>
           <WrappedComponent {...props} />
-          <div ref="map" />
+          <div ref={ref => this._mapRef = ref} />
         </React.Fragment>
       );
     }
